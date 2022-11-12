@@ -3,7 +3,7 @@ import { createReducer } from '@reduxjs/toolkit';
 import * as ac from './action.creator';
 
 const initialState: Array<sneakersAndSocks> = [];
-export const taskReducer = createReducer(initialState, (builder) => {
+export const reducerSocks = createReducer(initialState, (builder) => {
     builder.addCase(ac.loadActionCreator, (_state, action) => action.payload);
     builder.addCase(ac.addActionCreator, (state, action) => [
         ...state,
