@@ -1,7 +1,7 @@
 import { sneakersAndSocks } from '../features/types/sneakersAndSocks';
-import { Repository } from './repository';
+import { RepositorySneakers } from './repositoryType/repository.sneakers';
 
-export class SneackersRepository implements Repository<sneakersAndSocks> {
+export class SneakerRepository implements RepositorySneakers<sneakersAndSocks> {
     url: string;
     constructor(
         url = 'https://servidor-mrsmeeseeks-production.up.railway.app/sneakers'
@@ -9,55 +9,50 @@ export class SneackersRepository implements Repository<sneakersAndSocks> {
         this.url = url;
     }
 
-    createError(response: Response) {
+    createErrorSneaker(response: Response) {
         const message = `Error ${response.status}: ${response.statusText}`;
         const error = new Error(message);
         error.name = 'HTTPError';
         return error;
     }
 
-    // read / get
-    getAll(): Promise<Array<Task>> {
+    getAllSneakers(): Promise<Array<sneakersAndSocks>> {
         return fetch(this.url).then((response) => {
             if (response.ok) return response.json();
-            throw this.createError(response);
+            throw this.createErrorSneaker(response);
         });
     }
-
-    // create / post
-    create(task: Partial<Task>): Promise<Task> {
+    createSneaker(sock: Partial<sneakersAndSocks>): Promise<sneakersAndSocks> {
         return fetch(this.url, {
             method: 'POST',
-            body: JSON.stringify(task),
+            body: JSON.stringify(sock),
             headers: {
                 'content-type': 'application/json',
             },
         }).then((response) => {
             if (response.ok) return response.json();
-            throw this.createError(response);
+            throw this.createErrorSneaker(response);
         });
     }
-
-    // delete
-    delete(id: number): Promise<void> {
+    updateSneaker(
+        partialsock: Partial<sneakersAndSocks>
+    ): Promise<sneakersAndSocks> {
+        return fetch(`${this.url}/ ${partialsock.id}`, {
+            method: 'PATCH',
+            body: JSON.stringify(partialsock),
+            headers: {
+                'content-type': 'application/json',
+            },
+        }).then((response) => {
+            if (response.ok) return response.json();
+            throw this.createErrorSneaker(response);
+        });
+    }
+    deleteSneaker(id: number): Promise<void> {
         return fetch(`${this.url}/${id}`, {
             method: 'DELETE',
         }).then((response) => {
-            if (!response.ok) throw this.createError(response);
-        });
-    }
-
-    // uptate / patch
-    update(partialTask: Partial<Task>): Promise<Task> {
-        return fetch(`${this.url}/${partialTask.id}`, {
-            method: 'PATCH',
-            body: JSON.stringify(partialTask),
-            headers: {
-                'content-type': 'application/json',
-            },
-        }).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createError(response);
+            if (!response.ok) throw this.createErrorSneaker(response);
         });
     }
 }
