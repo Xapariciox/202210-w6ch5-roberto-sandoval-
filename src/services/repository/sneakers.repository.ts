@@ -1,5 +1,5 @@
-import { sneakersAndSocks } from '../features/types/sneakersAndSocks';
-import { RepositorySneakers } from './repositoryType/repository.sneakers';
+import { sneakersAndSocks } from '../../features/types/sneakersAndSocks';
+import { RepositorySneakers } from '../repositoryType/repository.sneakers';
 
 export class SneakerRepository implements RepositorySneakers<sneakersAndSocks> {
     url: string;
