@@ -1,13 +1,33 @@
-GoT App Redux
-Github Actions
-Sonar
-Netlify
-Desarrolla una aplicación para gestionar un CRUD de Personajes de GoT, con React + Redux.
+Challenge Weekend - React-Redux
+E-Comerce
+Productos en 2 categorías.
 
-La app tendrá una sola página, donde aparecerá un formulario (añadir personaje) y un listado.
+Pagina Ofertas
 
-Milestones
-1 - Los datos se almacenan en un array 2 - La app se comunica con localStorage, donde estarán los personajes.
+Página categoría 1
 
-Importante: testear la app.
-Puedes (OPCIONALMENTE) usar la estética y el modelo de datos del anterior challenge GoT
+Página categoría 2
+
+Pagina de detalle
+
+Extra: carrito genérico (RUD)
+
+NO se hace: Dashboard de administración
+
+Definimos modelos de datos
+
+Navegación
+
+Datos - Store - Redux - Typescript
+
+Backend - JSON-Server
+
+Páginas
+
+Carrito
+
+TESES de TOOOOODOO
+Deploy
+
+Front: Netlify
+Fake-Backend: Railway / Render
