@@ -17,10 +17,14 @@ export class SneakerRepository implements RepositorySneakers<sneakersAndSocks> {
     }
 
     getAllSneakers(): Promise<Array<sneakersAndSocks>> {
-        return fetch(this.url).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSneaker(response);
-        });
+        return fetch(this.url)
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSneaker(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     createSneaker(sock: Partial<sneakersAndSocks>): Promise<sneakersAndSocks> {
         return fetch(this.url, {
@@ -29,10 +33,14 @@ export class SneakerRepository implements RepositorySneakers<sneakersAndSocks> {
             headers: {
                 'content-type': 'application/json',
             },
-        }).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSneaker(response);
-        });
+        })
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSneaker(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     updateSneaker(
         partialsock: Partial<sneakersAndSocks>
@@ -43,16 +51,24 @@ export class SneakerRepository implements RepositorySneakers<sneakersAndSocks> {
             headers: {
                 'content-type': 'application/json',
             },
-        }).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSneaker(response);
-        });
+        })
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSneaker(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     deleteSneaker(id: number): Promise<void> {
         return fetch(`${this.url}/${id}`, {
             method: 'DELETE',
-        }).then((response) => {
-            if (!response.ok) throw this.createErrorSneaker(response);
-        });
+        })
+            .then((response) => {
+                if (!response.ok) throw this.createErrorSneaker(response);
+            })
+            .catch((error: Error) => {
+                return `${error}` as unknown as void;
+            });
     }
 }
