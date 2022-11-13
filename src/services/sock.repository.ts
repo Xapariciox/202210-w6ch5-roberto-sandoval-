@@ -17,10 +17,14 @@ export class SocksRepository implements RepositorySocks<sneakersAndSocks> {
     }
 
     getAllSocks(): Promise<Array<sneakersAndSocks>> {
-        return fetch(this.url).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSock(response);
-        });
+        return fetch(this.url)
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSock(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     createSock(sock: Partial<sneakersAndSocks>): Promise<sneakersAndSocks> {
         return fetch(this.url, {
@@ -29,10 +33,14 @@ export class SocksRepository implements RepositorySocks<sneakersAndSocks> {
             headers: {
                 'content-type': 'application/json',
             },
-        }).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSock(response);
-        });
+        })
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSock(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     updateSock(
         partialsock: Partial<sneakersAndSocks>
@@ -43,16 +51,24 @@ export class SocksRepository implements RepositorySocks<sneakersAndSocks> {
             headers: {
                 'content-type': 'application/json',
             },
-        }).then((response) => {
-            if (response.ok) return response.json();
-            throw this.createErrorSock(response);
-        });
+        })
+            .then((response) => {
+                if (response.ok) return response.json();
+                throw this.createErrorSock(response);
+            })
+            .catch((error: Error) => {
+                return `${error}`;
+            });
     }
     deleteSock(id: number): Promise<void> {
         return fetch(`${this.url}/${id}`, {
             method: 'DELETE',
-        }).then((response) => {
-            if (!response.ok) throw this.createErrorSock(response);
-        });
+        })
+            .then((response) => {
+                if (!response.ok) throw this.createErrorSock(response);
+            })
+            .catch((error: Error) => {
+                return `${error}` as unknown as void;
+            });
     }
 }
