@@ -1,7 +1,7 @@
 export const DetailsPage = () => {
     return (
         <>
-            <h1>Detail</h1>
+            <h1>Details</h1>
         </>
     );
 };
