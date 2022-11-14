@@ -1,13 +1,13 @@
-import { SocksRepository } from './sock.repository';
+import { SneakerRepository } from './sneakers.repository';
 
 describe('Given TaskApi Service', () => {
     describe('When we instantiate it', () => {
-        let service: SocksRepository;
+        let service: SneakerRepository;
         beforeEach(() => {
-            service = new SocksRepository();
+            service = new SneakerRepository();
         });
         test('Then if i use service.error(), it should return an error', () => {
-            const error = service.createErrorSock(
+            const error = service.createErrorSneaker(
                 new Response('Error', {
                     status: 400,
                     statusText: 'error',
@@ -25,7 +25,7 @@ describe('Given TaskApi Service', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue([]),
             });
-            const result = await service.getAllSocks();
+            const result = await service.getAllSneakers();
             expect(fetch).toHaveBeenCalled();
             expect(result).toEqual([]);
         });
@@ -36,7 +36,7 @@ describe('Given TaskApi Service', () => {
                 statusText: 'error',
             });
 
-            const expectedResult = await service.getAllSocks();
+            const expectedResult = await service.getAllSneakers();
             const result = new Error('Error 400: error');
             result.name = 'HTTPError';
             expect(expectedResult).toBe(result.toString());
@@ -44,7 +44,7 @@ describe('Given TaskApi Service', () => {
 
         test(`Then if I use service.create()
                 it should return a Promise of the crated product`, async () => {
-            const mockProduct = {
+            const mockSneaker = {
                 id: 1,
                 name: '',
                 offer: true,
@@ -57,11 +57,11 @@ describe('Given TaskApi Service', () => {
 
             global.fetch = jest.fn().mockResolvedValue({
                 ok: true,
-                json: jest.fn().mockResolvedValue(mockProduct),
+                json: jest.fn().mockResolvedValue(mockSneaker),
             });
-            const result = await service.createSock(mockProduct);
+            const result = await service.createSneaker(mockSneaker);
             expect(fetch).toHaveBeenCalled();
-            expect(result).toEqual(mockProduct);
+            expect(result).toEqual(mockSneaker);
         });
 
         test('Then if i use service.createSneaker() and the response went wrong it shold throw an error', async () => {
@@ -71,14 +71,14 @@ describe('Given TaskApi Service', () => {
                 statusText: 'error',
             });
 
-            const expectedResult = await service.createSock({});
+            const expectedResult = await service.createSneaker({});
             const result = new Error('Error 400: error');
             result.name = 'HTTPError';
             expect(expectedResult).toBe(result.toString());
         });
 
         test('Then if I use service.deletesneaker() it should return an undefined', async () => {
-            const mockProduct = {
+            const mockSneaker = {
                 id: 1,
                 name: '',
                 offer: true,
@@ -93,7 +93,7 @@ describe('Given TaskApi Service', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue({}),
             });
-            const result = await service.deleteSock(mockProduct.id);
+            const result = await service.deleteSneaker(mockSneaker.id);
             expect(fetch).toHaveBeenCalled();
             expect(result).toBeUndefined();
         });
@@ -105,14 +105,14 @@ describe('Given TaskApi Service', () => {
                 statusText: 'error',
             });
 
-            const expectedResult = await service.deleteSock(1);
+            const expectedResult = await service.deleteSneaker(1);
             const result = new Error('Error 400: error');
             result.name = 'HTTPError';
             expect(expectedResult).toBe(result.toString());
         });
 
         test('Then if I use service.update.sneaker it should return', async () => {
-            const mockProduct = {
+            const mockSneaker = {
                 name: 'name',
             };
 
@@ -120,7 +120,7 @@ describe('Given TaskApi Service', () => {
                 ok: true,
                 json: jest.fn().mockResolvedValue({}),
             });
-            const result = await service.updateSock(mockProduct);
+            const result = await service.updateSneaker(mockSneaker);
 
             expect(fetch).toHaveBeenCalled();
             expect(result).toEqual({});
@@ -133,7 +133,7 @@ describe('Given TaskApi Service', () => {
                 statusText: 'error',
             });
 
-            const expectedResult = await service.updateSock({});
+            const expectedResult = await service.updateSneaker({});
             const result = new Error('Error 400: error');
             result.name = 'HTTPError';
             expect(expectedResult).toBe(result.toString());
@@ -141,9 +141,9 @@ describe('Given TaskApi Service', () => {
     });
 
     describe('When we instantiate it with an specified url', () => {
-        let service: SocksRepository;
+        let service: SneakerRepository;
         beforeEach(() => {
-            service = new SocksRepository('test');
+            service = new SneakerRepository('test');
         });
 
         test('Then it should change the fetch url to the specified one', () => {

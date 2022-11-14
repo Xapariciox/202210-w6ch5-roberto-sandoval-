@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { rootState } from '../../infrastructure/store/store';
-import { SocksRepository } from '../../services/sock.repository';
+import { SocksRepository } from '../../services/repository/sock.repository';
 import * as act from '../reducer.category.socks/action.creator';
 import {
     protoSneakersAndSocks,

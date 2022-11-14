@@ -1,3 +1,7 @@
-export function Prueb4455a() {
-    console.log('hola');
-}
+export const OffersPages = () => {
+    return (
+        <>
+            <h1>offerspage</h1>
+        </>
+    );
+};
